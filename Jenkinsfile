@@ -13,13 +13,6 @@ pipeline {
                 }
             }
         }
-        stage('Build docker image from Dockerfile') {
-            steps {
-                script {
-                    dockerImage = docker.build("${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}")
-                }
-            }
-        }
         stage('Static code analysis:SonarQube') {
             steps {
                 script {
@@ -29,6 +22,16 @@ pipeline {
                 }
             }
         }
+        stage('Build docker image from Dockerfile') {
+            steps {
+                script {
+                    sh 'pwd'
+                    sh 'ls -ltr'
+                    dockerImage = docker.build("${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}")
+                }
+            }
+        }
+        
         
         stage('Push Docker image to DockerHub registry') {
             steps {
