@@ -5,7 +5,7 @@ pipeline {
       DOCKER_IMAGE_TAG = "V${BUILD_ID}"
 
     }
-    
+    stages {
         stage('Build docker image from Dockerfile') {
             steps {
                 script {
@@ -59,4 +59,4 @@ pipeline {
             }
         }
     }
-
+}
