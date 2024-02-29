@@ -26,6 +26,8 @@ pipeline {
             steps {
                 script {
                     sh 'pwd'
+                    sh 'ls -R'
+                    sh 'cd target/'
                     sh 'ls -ltr'
                     dockerImage = docker.build("${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}")
                 }
