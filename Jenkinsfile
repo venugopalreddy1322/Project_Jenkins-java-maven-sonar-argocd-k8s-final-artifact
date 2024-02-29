@@ -9,6 +9,8 @@ pipeline {
         stage('Build docker image from Dockerfile') {
             steps {
                 script {
+                    sh 'pwd'
+                    sh 'ls -ltr'
                     dockerImage = docker.build("${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}")
                 }
             }
