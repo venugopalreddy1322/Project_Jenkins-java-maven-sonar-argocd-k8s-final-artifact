@@ -9,8 +9,6 @@ pipeline {
         stage('Build docker image from Dockerfile') {
             steps {
                 script {
-                    sh 'pwd'
-                    sh 'ls -ltr'
                     dockerImage = docker.build("${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}")
                 }
             }
@@ -18,8 +16,6 @@ pipeline {
         stage('Static code analysis:SonarQube') {
             steps {
                 script {
-                    sh 'pwd'
-                    sh 'ls -ltr'
                     withSonarQubeEnv(credentialsId: 'sonarqube') {
                     sh 'mvn sonar:sonar'
                     }
@@ -48,8 +44,7 @@ pipeline {
                     sh '''
                     git config user.email "venugopalreddy1322@gmail.com"
                     git config user.name "Venugopalreddy1322"
-                    pwd
-                    ls -ltr
+                    
                     git add k8smanifest.yaml
                     git commit -m "Update deployment image to version ${BUILD_NUMBER}" k8smanifest.yaml
                     git push https://${GITHUB_AUTH}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
