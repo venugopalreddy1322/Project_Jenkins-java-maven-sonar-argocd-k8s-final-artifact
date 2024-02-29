@@ -9,7 +9,7 @@ pipeline {
         stage('Build package') {
             steps {
                 script {
-                    sh 'mvn clean package'
+                    sh 'mvn clean install'
                 }
             }
         }
@@ -25,9 +25,7 @@ pipeline {
         stage('Build docker image from Dockerfile') {
             steps {
                 script {
-                    sh 'pwd'
-                    sh 'ls -R'
-                    dockerImage = docker.build("${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}")
+                     dockerImage = docker.build("${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}")
                 }
             }
         }
