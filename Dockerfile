@@ -1,28 +1,13 @@
-# Build Stage
-#FROM adoptopenjdk/openjdk11:alpine AS builder
-FROM maven:3.8.3-openjdk-11 AS build
-WORKDIR /app
-
-COPY pom.xml .
-
-RUN mvn clean install -DskipTests
-
-# Clean up Maven dependencies
-RUN rm -rf ~/.m2
-
-COPY src src
-
-# Runtime Stage
+# You can change this base image to anything else
+# But make sure to use the correct version of Java
 FROM adoptopenjdk/openjdk11:alpine-jre
-WORKDIR /app
 
-# Create a non-root user
-#RUN adduser -D myuser
-#USER myuser
+# Simply the artifact path
+ARG artifact=target/spring-boot-web.jar
 
-# Copy necessary artifacts from the builder stage
-COPY --from=builder /app/target/spring-boot-web.jar app.jar
+WORKDIR /opt/app
 
-EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "app.jar"]
+COPY ${artifact} app.jar
 
+# This should not be changed
+ENTRYPOINT ["java","-jar","app.jar"]
