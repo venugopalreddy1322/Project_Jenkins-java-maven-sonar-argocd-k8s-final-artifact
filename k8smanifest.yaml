@@ -18,7 +18,7 @@ spec:
   spec:
     containers:
     - name: argocd-k8-app-container
-      image: venu1322/cicd-jenkins-argocd-k8:replaceImageTag
+      image: venu1322/cicd-jenkins-argocd-k8:22
       ports:
       - containerPort: 8080
 ---
