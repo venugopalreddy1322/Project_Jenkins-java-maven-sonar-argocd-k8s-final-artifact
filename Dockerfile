@@ -3,11 +3,12 @@
 FROM adoptopenjdk/openjdk11:alpine-jre
 
 # Simply the artifact path
-ARG artifact=target/spring-boot-web.jar
+#ARG artifact=target/spring-boot-web.jar
 
 WORKDIR /opt/app
 
-COPY ${artifact} app.jar
+#COPY ${artifact} app.jar
+COPY target/spring-boot-web.jar /opt/app/app.jar
 
 # This should not be changed
 ENTRYPOINT ["java","-jar","app.jar"]
