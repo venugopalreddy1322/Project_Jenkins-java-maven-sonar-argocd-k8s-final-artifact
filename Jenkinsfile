@@ -6,6 +6,13 @@ pipeline {
 
     }
     stages {
+        stage('Build package') {
+            steps {
+                script {
+                    sh 'mvn clean package'
+                }
+            }
+        }
         stage('Build docker image from Dockerfile') {
             steps {
                 script {
